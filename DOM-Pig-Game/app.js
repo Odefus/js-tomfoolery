@@ -9,11 +9,15 @@ GAME RULES:
 
 */
 
-var scores, roundScores, activePlayer;
+var scores, roundScores, activePlayer, gamePlaying;
 
 init();
 
 document.querySelector(".btn-roll").addEventListener("click", function() {
+    
+    // Exit if the game is not playing
+    if (!gamePlaying) return;
+    
     // Get random number between 1 and 6 (inclusive)
     var dice = Math.floor(Math.random() * 6) + 1;
 
@@ -36,6 +40,9 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
 });
 
 document.querySelector(".btn-hold").addEventListener("click", function() {
+    // Exit if game is not playing
+    if (!gamePlaying) return;
+    
     // Increment players score by round score
     scores[activePlayer] += roundScore;
 
@@ -49,6 +56,8 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
         document.querySelector(".dice").style.display = "none";
         document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
         document.querySelector(".player-" + activePlayer + "-panel").classList.remove("active");
+    
+        gamePlaying = false;
     }
     else {
         // Pass the turn to the next player
@@ -74,6 +83,8 @@ function nextPlayer() {
 document.querySelector(".btn-new").addEventListener("click", init);
 
 function init() {
+    // This initializes the game state
+
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
@@ -91,4 +102,6 @@ function init() {
     document.querySelector(".player-0-panel").classList.remove("active");
     document.querySelector(".player-1-panel").classList.remove("active");
     document.querySelector(".player-0-panel").classList.add("active");
+
+    gamePlaying = true;
 }
