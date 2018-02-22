@@ -100,8 +100,13 @@ function init() {
     document.querySelector(".player-1-panel").classList.remove("active");
     document.querySelector(".player-0-panel").classList.add("active");
 
-    winningScore = Number(document.querySelector(".inp").value);
-    console.log(winningScore);
+    var input = document.querySelector(".inp").value;
+
+    if (input) {
+        winningScore = input;
+    } else {
+        winninScore = 100;
+    }
 
     gamePlaying = true;
 }
