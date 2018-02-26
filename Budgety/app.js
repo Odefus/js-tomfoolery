@@ -389,7 +389,7 @@ var controller = (function(budgetCtrl, UICtrl) {
             UICtrl.displayMonth();
             UICtrl.displayBudget({
                 budget: 0,
-                totalInc: 0,
+                totalInc: 0, 
                 totalExp: 0,
                 percentage: -1
             });
