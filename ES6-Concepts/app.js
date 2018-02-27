@@ -41,20 +41,45 @@ class EOR {
 
     addPark(obj) {
         this.parks.push(obj);
+        this.calcParkAvgAge();
     }
 
     calcParkAvgAge() {
-
         this.parkAvgAge = this.parks
             .map(p => p.calcAge())
             .reduce((a, b) => a + b, 0)
             / this.parks.length;
+    }
 
-            console.log(this.parkAvgAge);
+    printParkReport() {
+        console.log("----- PARK REPORT -----");
+        console.log(`Our ${this.parks.length} have an average age of ${this.parkAvgAge} years.`);
+        this.parks.forEach(p => console.log(
+            `${p.name} has a tree density of ${p.calcTreeDensity()} trees per square km`
+        ));
+        this.parks.filter(p => p.trees >= 1000)
+            .forEach(p => console.log(
+                `${p.name} has more than 1000 trees.`
+            ));
     }
 
     addStreet(obj) {
         this.streets.push(obj);
+        this.calcStreetData();
+    }
+
+    calcStreetData() {
+        this.streetLengthSum = this.streets
+            .map(s => s.length)
+            .reduce((a, b) => a + b, 0);
+
+        this.streetAvgLen = this.streetLengthSum / this.streets.length;
+
+        console.log(this.streetLengthSum + " - " + this.streetAvgLen);
+    }
+
+    printStreetReport() {
+
     }
 }
 
@@ -71,4 +96,5 @@ eor.addStreet(new Street("Evergreen Street", 2006, 1, "small"));
 eor.addStreet(new Street("4th Street", 2015, 2));
 eor.addStreet(new Street("Sunset Boulevard", 1982, 5, "huge"));
 
-console.log(eor.calcParkAvgAge());
+eor.printParkReport();
+eor.printStreetReport();
