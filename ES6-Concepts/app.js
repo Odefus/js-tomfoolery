@@ -53,7 +53,7 @@ class EOR {
 
     printParkReport() {
         console.log("----- PARK REPORT -----");
-        console.log(`Our ${this.parks.length} have an average age of ${this.parkAvgAge} years.`);
+        console.log(`Our ${this.parks.length} parks have an average age of ${this.parkAvgAge} years.`);
         this.parks.forEach(p => console.log(
             `${p.name} has a tree density of ${p.calcTreeDensity()} trees per square km`
         ));
@@ -74,12 +74,14 @@ class EOR {
             .reduce((a, b) => a + b, 0);
 
         this.streetAvgLen = this.streetLengthSum / this.streets.length;
-
-        console.log(this.streetLengthSum + " - " + this.streetAvgLen);
     }
 
     printStreetReport() {
-
+        console.log("----- STREET REPORT -----");
+        console.log(`Our ${this.streets.length} streets have a total length of ${this.streetLengthSum} km, with an average of ${this.streetAvgLen} km.`);
+        this.streets.forEach(s => console.log(
+            `${s.name}, built in ${s.year}, is a ${s.size} street.`
+        ));
     }
 }
 
