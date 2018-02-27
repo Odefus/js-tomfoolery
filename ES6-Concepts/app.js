@@ -10,9 +10,10 @@ class Entity {
 }
 
 class Street extends Entity {
-    constructor(name, year, size = "normal") {
+    constructor(name, year, length, size = "normal") {
         super(name, year);
         this.size = size;
+        this.length = length;
     }
 }
 
@@ -28,18 +29,31 @@ class Park extends Entity {
     }
 }
 
-const greenPark = new Park("Green Park", 1972, 900, 6);
-const nationalPark = new Park("National Park", 1962, 2000, 5);
-const OakPark = new Park("Oak Park", 1895, 400, 1);
+class EOR {
+    constructor() {
+        this.parks = new Map();
+        this.streets = new Map();
+    }
 
-const OceanStreet = new Street("Ocean Avenue", 1999, "big");
+    addPark(key, obj) {
+        this.parks.set(key, obj);
+    }
 
+    addStreet(key, obj) {
+        this.streets.set(key, obj);
+    }
+}
 
-console.log(someStreet);
-console.log(someStreet.calcAge());
+const eor = new EOR();
 
-console.log("----------------");
+// Creating and adding the parks to the reporter
+eor.addPark(greenPark, new Park("Green Park", 1972, 900, 6));
+eor.addPark(nationalPark, new Park("National Park", 1962, 2000, 5));
+eor.addPark(OakPark, new Park("Oak Park", 1895, 400, 1));
 
-console.log(somePark);
-console.log(somePark.calcAge());
-console.log(somePark.calcTreeDensity());
+// Creating and adding the streets to the reporter
+eor.addStreet(oceanStreet, new Street("Ocean Avenue", 1999, 3, "big"));
+eor.addStreet(evergreenStreet, new Street("Evergreen Street", 2006, 1, "small"));
+eor.addStreet(fourthStreet, new Street("4th Street", 2015, 2));
+eor.addStreet(sunsetStreet, new Street("Sunset Boulevard", 1982, 5, "huge"));
+
